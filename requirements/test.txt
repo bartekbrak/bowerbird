@@ -1,0 +1,5 @@
+pytest
+pytest-isort
+pytest-flake8
+# Don't use pytest-capturelog, it's deprecated
+pytest-catchlog
