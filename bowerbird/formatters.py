@@ -24,7 +24,7 @@ class PygmentsFormatter(BaseColorFormatter):
         'CRITICAL': 'turquoise',
     }
     DEFAULT_FORMAT = (
-        '%(level_color)s%(levelname)s%(reset)s:%(name)s:%(message)s:\n%(data)s'
+        '%(level_color)s%(levelname)s%(reset)s:%(name)s:%(message)s:%(data)s'
     )
 
     def __init__(self, style='friendly', fmt=None, datefmt=None, pprint=True):
@@ -59,4 +59,8 @@ class PygmentsFormatter(BaseColorFormatter):
             data = record.data
             data = pformat(data) if self.pprint else unicode(data)
             record.data = highlight(data, self.lexer, self.formatter)
+            if self.pprint:
+                record.data = '\n' + record.data
+        else:
+            record.data = ''
         return super(PygmentsFormatter, self).format(record)

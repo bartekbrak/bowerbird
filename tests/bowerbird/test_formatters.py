@@ -17,3 +17,13 @@ def test_colours_the_log(caplog):
         "{violet}'{reset2}{violet}string{reset2}{violet}'{reset2}\n\n"
     ).format(violet='\x1b[38;5;61m', reset2='\x1b[39m', **codes)
     assert caplog.text == expected
+
+
+def test_what_if_there_is_no_data(caplog):
+    logger = logging.getLogger('test_logger')
+    caplog.handler.formatter = PygmentsFormatter()
+    logger.debug('test')
+    expected = (
+        "{white}DEBUG{reset}:test_logger:test:\n"
+    ).format(violet='\x1b[38;5;61m', reset2='\x1b[39m', **codes)
+    assert caplog.text == expected
