@@ -8,13 +8,6 @@ from pygments.console import codes
 from bowerbird.formatters import PygmentsFormatter
 
 
-def test_requires_data_set(pygments_logger, capsys):
-    pygments_logger.debug('')
-    _, err = capsys.readouterr()
-    # this does not raise due to logging.Handler.handleError default behaviour
-    assert "AssertionError: Provide extra={'data': 'something'}" in err
-
-
 def test_colours_the_log(caplog):
     logger = logging.getLogger('test_logger')
     caplog.handler.formatter = PygmentsFormatter()

@@ -52,10 +52,11 @@ class PygmentsFormatter(BaseColorFormatter):
         return textwrap.dedent(demo)
 
     def format(self, record):
-        assert hasattr(record, 'data'), "Provide extra={'data': 'something'}"
         color = self.default_level_colors[record.levelname]
         record.level_color = console.codes[color]
         record.reset = console.codes['reset']
-        data = pformat(record.data) if self.pprint else unicode(record.data)
-        record.data = highlight(data, self.lexer, self.formatter)
+        if hasattr(record, 'data'):
+            data = record.data
+            data = pformat(data) if self.pprint else unicode(data)
+            record.data = highlight(data, self.lexer, self.formatter)
         return super(PygmentsFormatter, self).format(record)
