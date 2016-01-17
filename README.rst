@@ -26,6 +26,14 @@ dictConfig:
         ...
     }
 
+Then, in code, use with ``extra={'data': ['some', 'data']}``:
+
+::
+
+    logger.debug('I got this data', extra={'data': ['some', 'data']})
+
+and that data will be pygmentized.
+
 TODO / Research
 ===============
 
