@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 2 ]
+  then
+    echo "provide FROM TO args"
+  else
+    # No, this is not very clever
+    sed -i -e "s/$1/$2/g" setup.py bowerbird/__init__.py
+fi
+
+
