@@ -6,7 +6,6 @@ setup(
   version='0.2.0',
   description=(
       'A collection of stdlib logging.Formatter classes using Pygments'),
-  install_requires=['Pygments'],
   author='Bartek Brak',
   author_email='bartek0brak@gmail.com',
   url='https://github.com/bartekbrak/bowerbird',
