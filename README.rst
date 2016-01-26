@@ -26,13 +26,19 @@ dictConfig:
         ...
     }
 
-Then, in code, use with ``extra={'data': ['some', 'data']}``:
+Then, in code, use with optional extra params:
+
+- ``data``: any python object, can be nested
+- ``free_text``: Any text, will also by pygmentized but with a different style
 
 ::
 
-    logger.debug('I got this data', extra={'data': ['some', 'data']})
+    free_text = "db_counts:\nauth_user from 0 to 10"
+    logger.debug(
+        'I got this data',
+        extra={'data': some_obj.__dict__, 'free_text': free_text}
+    )
 
-and that data will be pygmentized.
 
 TODO / Research
 ===============
