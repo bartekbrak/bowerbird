@@ -1,5 +1,6 @@
 import logging
 import textwrap
+import sqlparse
 from pprint import pformat
 
 from pygments import console, highlight
@@ -12,6 +13,18 @@ class BaseColorFormatter(logging.Formatter):
         self.lexer = get_lexer_by_name(lexer)
         self.formatter = Terminal256Formatter(style=style)
         super(BaseColorFormatter, self).__init__(fmt, datefmt)
+
+
+class ColorSQLFormatter(BaseColorFormatter):
+    def __init__(self, style='manni', fmt=None, datefmt=None):
+        super(ColorSQLFormatter, self).__init__(style, 'sql', fmt, datefmt)
+
+    def format(self, record):
+        # django.db.backends.utils.CursorDebugWrapper#execute sets this in extra
+        assert hasattr(record, 'sql'), "Provide extra={'sql': 'SELECT something...'}"
+        sql = sqlparse.format(record.sql, reindent=True, keyword_case='upper')
+        record.sql = highlight(sql, self.lexer, self.formatter)
+        return super(ColorSQLFormatter, self).format(record)
 
 
 class PygmentsFormatter(BaseColorFormatter):
