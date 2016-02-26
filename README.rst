@@ -28,15 +28,16 @@ dictConfig:
 
 Then, in code, use with optional extra params:
 
-- ``data``: any python object, can be nested
-- ``free_text``: Any text, will also by pygmentized but with a different style
+- ``data``: any python object, can be nested, will be pygentized and pretty printed
+- ``free``: Any text, will also by pygmentized
+- ``sql``: SQL string, will be formatted and pygmentized
 
 ::
 
-    free_text = "db_counts:\nauth_user from 0 to 10"
+    free = "db_counts:\nauth_user from 0 to 10"
     logger.debug(
         'I got this data',
-        extra={'data': some_obj.__dict__, 'free_text': free_text}
+        extra={'data': some_obj.__dict__, 'free': free}
     )
 
 
